@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}{% block title %}Create account{% endblock %}
+{% block content %}
+<section class="auth-layout">
+  <div class="auth-story"><div class="eyebrow"><span class="eyebrow-dot"></span> A FRESH START</div><h1>Get organized.<br><span>Stay focused.</span></h1><p>Create your own secure workspace for student records. Your list is private to your account.</p><div class="story-stat"><span class="stat-icon">✦</span><span><strong>Ready in a moment</strong><small>Set up an account and start building your list.</small></span></div></div>
+  <div class="auth-card"><div class="card-kicker">JOIN STUDENT DESK</div><h2>Create account</h2><p class="muted">A few details and you're ready to go.</p><form method="post" class="form-stack"><label for="username">Username</label><input id="username" name="username" autocomplete="username" placeholder="Choose a username" maxlength="40" required autofocus><label for="password">Password</label><input id="password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" required><label for="confirmation">Confirm password</label><input id="confirmation" name="confirmation" type="password" autocomplete="new-password" placeholder="Enter it again" required><button class="button full-width" type="submit">Create account <span>→</span></button></form><p class="auth-switch">Already have an account? <a href="{{ url_for('login') }}">Sign in</a></p></div>
+</section>
+{% endblock %}
