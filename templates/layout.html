@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f8fb">
+  <title>{% block title %}Student Desk{% endblock %} · Student Desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('dashboard') if session.get('user_id') else url_for('login') }}">
+      <span class="brand-mark">S</span><span>student<span class="brand-light">desk</span></span>
+    </a>
+    {% if session.get('user_id') %}
+    <nav class="nav-actions" aria-label="Main navigation">
+      <a class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}" href="{{ url_for('dashboard') }}">Students</a>
+      <a class="button button-small" href="{{ url_for('add_student') }}">＋ <span>Add student</span></a>
+      <span class="user-pill"><span class="avatar">{{ session.get('username', 'U')[0]|upper }}</span><span class="user-name">{{ session.get('username') }}</span></span>
+      <form action="{{ url_for('logout') }}" method="post"><button class="logout-button" type="submit">Sign out</button></form>
+    </nav>
+    {% endif %}
+  </header>
+  <main class="page-shell">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}<div class="flash-stack" role="status">{% for category, message in messages %}<div class="flash flash-{{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="footer"><span>Student Desk</span><span>Simple records. Clear view.</span></footer>
+</body>
+</html>
